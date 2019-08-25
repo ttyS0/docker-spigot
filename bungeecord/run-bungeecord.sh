@@ -3,21 +3,21 @@
 BUNGEE_JAR=$BUNGEE_HOME/BungeeCord.jar
 
 if [[ ! -e $BUNGEE_JAR ]]; then
-    echo "Downloading ${BUNGEE_JAR_URL:=${BUNGEE_BASE_URL}/${BUNGEE_JOB_ID:-lastStableBuild}/artifact/bootstrap/target/BungeeCord.jar}"
-    if ! curl -o $BUNGEE_JAR -fsSL $BUNGEE_JAR_URL; then
-        echo "ERROR: failed to download" >&2
-        exit 2
-    fi
+  echo "Downloading ${BUNGEE_JAR_URL:=${BUNGEE_BASE_URL}/${BUNGEE_JOB_ID:-lastStableBuild}/artifact/bootstrap/target/BungeeCord.jar}"
+  if ! curl -o $BUNGEE_JAR -fsSL $BUNGEE_JAR_URL; then
+    echo "ERROR: failed to download" >&2
+    exit 2
+  fi
 fi
 
 if [ -d /plugins ]; then
-    echo "Copying BungeeCord plugins over..."
-    cp -r /plugins $BUNGEE_HOME
+  echo "Copying BungeeCord plugins over..."
+  cp -r /plugins $BUNGEE_HOME
 fi
 
 if [ -d /config ]; then
-    echo "Copying BungeeCord configs over..."
-    cp -u /config/config.yml "$BUNGEE_HOME/config.yml"
+  echo "Copying BungeeCord configs over..."
+  cp -u /config/config.yml "$BUNGEE_HOME/config.yml"
 fi
 
 if [ $UID == 0 ]; then
