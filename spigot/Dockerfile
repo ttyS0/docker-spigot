@@ -16,17 +16,19 @@ RUN java -jar BuildTools.jar --rev ${SPIGOT_BUILD_REV}
 FROM adoptopenjdk/openjdk11:jre
 ARG MEM="2g"
 ENV JVM_OPTS="-Xms${MEM} -Xmx${MEM}"
-ENV SPIGOT_OPTS="nogui"
+ENV SPIGOT_OPTS="nogui --noconsole"
 ARG SPIGOT_VERSION=1.14.4
+ENV SPIGOT_DIR="/minecraft/server"
 
-RUN mkdir -p /minecraft/server
+RUN mkdir -p ${SPIGOT_DIR}
 
 COPY --from=build /spigot-${SPIGOT_VERSION}.jar /minecraft/spigot.jar
+COPY run-spigot.sh /usr/bin/
 
-WORKDIR /minecraft/server
+WORKDIR ${SPIGOT_DIR}
 
 # Expose the standard Minecraft port, and remote console port
 EXPOSE 25565
 EXPOSE 25575
 
-CMD ["/bin/sh", "-c", "java ${JVM_OPTS} -Dcom.mojang.eula.agree=true -jar /minecraft/spigot.jar ${SPIGOT_OPTS}"]
+CMD ["/usr/bin/run-spigot.sh"]
