@@ -1,11 +1,14 @@
-FROM adoptopenjdk/openjdk12:alpine-jre
+FROM adoptopenjdk/openjdk11:alpine-jre
 
-VOLUME ["/server", "/plugins", "/config"]
+VOLUME ["/plugins", "/config"]
 WORKDIR /server
 
-ENV BUNGEE_HOME=/server \
-    BUNGEE_BASE_URL=https://ci.md-5.net/job/BungeeCord \
-    MEMORY=512m
+ENV BUNGEE_HOME=/server
+ENV BUNGEE_BUILD=1428
+ENV BUNGEE_FILE=https://ci.md-5.net/job/BungeeCord/${BUNGEE_BUILD}/artifact/bootstrap/target/BungeeCord.jar
+ENV MEMORY=512m
+
+RUN wget -O ${BUNGEE_HOME}/BungeeCord.jar ${BUNGEE_FILE}
 
 COPY *.sh /usr/bin/
 
