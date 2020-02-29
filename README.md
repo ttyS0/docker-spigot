@@ -1,2 +1,2 @@
-# docker-minecraft
-Spigot and BungeeCord builds
+# docker-spigot
+Spigot build
