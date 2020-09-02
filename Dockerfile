@@ -3,7 +3,7 @@ MAINTAINER Sean Johnson <sean@ttys0.net>
 
 #Spigot Build
 ENV FILE_BUILDTOOL https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-ARG SPIGOT_VERSION=1.16.1
+ARG SPIGOT_VERSION=1.16.2
 ENV SPIGOT_REV=${SPIGOT_VERSION}
 ENV SPIGOT_BUILD_REV=${SPIGOT_VERSION}
 
@@ -17,7 +17,7 @@ FROM adoptopenjdk/openjdk11:jre
 ARG MEM="2g"
 ENV JVM_OPTS="-Xms${MEM} -Xmx${MEM}"
 ENV SPIGOT_OPTS="nogui --noconsole"
-ARG SPIGOT_VERSION=1.16.1
+ARG SPIGOT_VERSION=1.16.2
 ENV SPIGOT_DIR="/minecraft/server"
 
 RUN mkdir -p ${SPIGOT_DIR}
