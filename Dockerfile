@@ -8,8 +8,8 @@ ENV FILE_BUILDTOOL https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfu
 ARG SPIGOT_VERSION=1.17.1
 ENV SPIGOT_REV=${SPIGOT_VERSION}
 ENV SPIGOT_BUILD_REV=${SPIGOT_VERSION}
-
-SHELL ["/bin/bash", "-c"]
+ARG MEM="2g"
+ENV JVM_OPTS="-Xms${MEM} -Xmx${MEM}"
 
 RUN apt-get update && apt-get -y upgrade && apt-get -y install git wget
 
