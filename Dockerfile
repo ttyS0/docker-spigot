@@ -15,17 +15,16 @@ RUN wget -O BuildTools.jar ${FILE_BUILDTOOL}
 
 RUN java -jar BuildTools.jar --rev ${SPIGOT_BUILD_REV}
 
-RUN mv /spigot-${SPIGOT_VERSION}.jar /spigot.jar
-
 FROM adoptopenjdk:16-jre
 ARG MEM="2g"
 ENV JVM_OPTS="-Xms${MEM} -Xmx${MEM}"
 ENV SPIGOT_OPTS="nogui --noconsole"
+ARG SPIGOT_VERSION=1.17.1
 ENV SPIGOT_DIR="/minecraft/server"
 
 RUN mkdir -p ${SPIGOT_DIR}
 
-COPY --from=build /spigot.jar /minecraft/spigot.jar
+COPY --from=build /spigot-${SPIGOT_VERSION}.jar /minecraft/spigot.jar
 COPY run-spigot.sh /usr/bin/
 RUN chmod a+x /usr/bin/run-spigot.sh
 
