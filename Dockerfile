@@ -13,7 +13,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install git wget
 
 RUN wget -O BuildTools.jar ${FILE_BUILDTOOL}
 
-RUN echo -e "#!/bin/bash \n java -jar BuildTools.jar --rev ${SPIGOT_BUILD_REV}" > /tmp/build_spigot.sh && chmod a+x /tmp/build_spigot.sh && /tmp/build_spigot.sh
+RUN echo "#!/bin/bash" > /tmp/build_spigot.sh && echo "java -jar BuildTools.jar --rev ${SPIGOT_BUILD_REV}" >> /tmp/build_spigot.sh && chmod a+x /tmp/build_spigot.sh && /tmp/build_spigot.sh
 
 FROM adoptopenjdk:16-jre
 ARG MEM="2g"
