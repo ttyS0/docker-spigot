@@ -15,7 +15,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install git wget
 
 RUN wget -O BuildTools.jar ${FILE_BUILDTOOL}
 
-RUN /bin/bash -c java -jar BuildTools.jar --rev ${SPIGOT_BUILD_REV}
+RUN java -jar BuildTools.jar --rev ${SPIGOT_BUILD_REV}
 
 FROM adoptopenjdk:16-jre
 ARG MEM="2g"
