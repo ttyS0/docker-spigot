@@ -1,4 +1,4 @@
-FROM adoptopenjdk:16-jdk as build
+FROM openjdk:18-slim as build
 MAINTAINER Sean Johnson <sean@ttys0.net>
 
 LABEL org.opencontainers.image.source = "https://github.com/ttyS0/docker-spigot"
@@ -16,7 +16,7 @@ RUN wget -O BuildTools.jar ${FILE_BUILDTOOL}
 RUN java -jar BuildTools.jar --rev ${SPIGOT_BUILD_REV} && \
     mv spigot-${SPIGOT_BUILD_REV}.jar spigot.jar
 
-FROM adoptopenjdk:16-jre
+FROM openjdk:18-slim
 ARG MEM="2g"
 ENV JVM_OPTS="-Xms${MEM} -Xmx${MEM}"
 ENV SPIGOT_OPTS="nogui --noconsole"
