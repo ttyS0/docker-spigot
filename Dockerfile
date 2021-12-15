@@ -13,8 +13,10 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install git wget
 
 RUN wget -O BuildTools.jar ${FILE_BUILDTOOL}
 
-RUN java -jar BuildTools.jar --rev ${SPIGOT_BUILD_REV} && \
-    mv spigot-${SPIGOT_BUILD_REV}.jar spigot.jar
+COPY buildtools.sh /usr/bin/
+RUN chmod a+x /usr/bin/buildtools.sh
+RUN /usr/bin/buildtools.sh
+RUN mv spigot-${SPIGOT_BUILD_REV}.jar spigot.jar
 
 FROM openjdk:17-slim
 ARG MEM="2g"
