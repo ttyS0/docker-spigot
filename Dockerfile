@@ -13,7 +13,6 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install git wget
 
 RUN wget -O BuildTools.jar ${FILE_BUILDTOOL}
 
-SHELL ["/bin/bash", "-c"]
 RUN java -jar BuildTools.jar --rev ${SPIGOT_BUILD_REV} && \
     mv spigot-${SPIGOT_BUILD_REV}.jar spigot.jar
 

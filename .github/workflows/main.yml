@@ -2,9 +2,6 @@ name: Build and Push Spigot Image
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - v*
 
 env:
   VERSION: 1.18.1
@@ -34,11 +31,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          platforms: linux/arm64,linux/amd64
-          push: true
-          tags: |
-            ghcr.io/ttys0/spigot:latest
-            ghcr.io/ttys0/spigot:${{ env.VERSION }}
+        run: |
+          IMAGE_ID=$(echo ghcr.io/${{ github.repository }} | tr '[A-Z]' '[a-z]')
+          RELEASE=$(echo v"${{ env.VERSION }}")
+          echo IMAGE_ID=$IMAGE_ID
+          echo RELEASE=$RELEASE
+          docker buildx build --push --tag $IMAGE_ID:$VERSION --platform linux/amd64,linux/arm64 .
