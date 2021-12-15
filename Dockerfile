@@ -8,6 +8,7 @@ ENV FILE_BUILDTOOL https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfu
 ARG SPIGOT_VERSION=1.18.1
 ENV SPIGOT_REV=${SPIGOT_VERSION}
 ENV SPIGOT_BUILD_REV=${SPIGOT_VERSION}
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get -y upgrade && apt-get -y install openjdk-17-jdk git wget
 
