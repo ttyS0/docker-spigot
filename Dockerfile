@@ -9,13 +9,13 @@ ARG SPIGOT_VERSION=1.18.1
 ENV SPIGOT_REV=${SPIGOT_VERSION}
 ENV SPIGOT_BUILD_REV=${SPIGOT_VERSION}
 
-RUN apt-get update && apt-get -y upgrade && apt-get -y install git wget
+RUN apt-get update && apt-get -y upgrade && apt-get -y install git wget bash
 
 RUN wget -O BuildTools.jar ${FILE_BUILDTOOL}
 
 SHELL ["/bin/bash", "--login", "-c"]
-RUN java -jar BuildTools.jar --rev ${SPIGOT_BUILD_REV} && \
-    mv spigot-${SPIGOT_BUILD_REV}.jar spigot.jar
+RUN "/usr/local/openjdk-17/bin/java -jar BuildTools.jar --rev ${SPIGOT_BUILD_REV}"
+RUN mv spigot-${SPIGOT_BUILD_REV}.jar spigot.jar
 
 FROM openjdk:17-slim
 ARG MEM="2g"
