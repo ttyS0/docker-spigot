@@ -1,13 +1,13 @@
 name: Build and Push Spigot Image
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ main ]
     tags:
       - v*
 
 env:
-  VERSION: 1.18
+  VERSION: 1.18.1
 
 jobs:
   build-and-push-image:
