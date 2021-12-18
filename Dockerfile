@@ -1,7 +1,7 @@
 FROM ubuntu:latest as build
 MAINTAINER Sean Johnson <sean@ttys0.net>
 
-LABEL org.opencontainers.image.source = "https://github.com/ttyS0/docker-spigot"
+LABEL org.opencontainers.image.source="https://github.com/ttyS0/docker-spigot"
 
 #Spigot Build
 ENV FILE_BUILDTOOL https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
