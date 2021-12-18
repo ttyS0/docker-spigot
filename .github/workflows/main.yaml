@@ -40,5 +40,4 @@ jobs:
           platforms: linux/arm64,linux/amd64
           push: true
           tags: |
-            ghcr.io/ttys0/spigot:latest
             ghcr.io/ttys0/spigot:${{ env.VERSION }}
