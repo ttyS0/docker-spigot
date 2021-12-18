@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk as build
+FROM openjdk:17-jdk as build
 MAINTAINER Sean Johnson <sean@ttys0.net>
 
 LABEL org.opencontainers.image.source="https://github.com/ttyS0/docker-spigot"
