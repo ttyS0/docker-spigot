@@ -10,7 +10,7 @@ ENV SPIGOT_REV=${SPIGOT_VERSION}
 ENV SPIGOT_BUILD_REV=${SPIGOT_VERSION}
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get -y upgrade && apt-get -y install openjdk-17-headless git wget
+RUN apt-get update && apt-get -y upgrade && apt-get -y install openjdk-17-jdk-headless git wget
 
 RUN wget -O BuildTools.jar ${FILE_BUILDTOOL}
 
