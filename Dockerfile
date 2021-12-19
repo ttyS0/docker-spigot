@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk as build
+FROM ubuntu:latest as build
 MAINTAINER Sean Johnson <sean@ttys0.net>
 
 LABEL org.opencontainers.image.source="https://github.com/ttyS0/docker-spigot"
@@ -10,7 +10,7 @@ ENV SPIGOT_REV=${SPIGOT_VERSION}
 ENV SPIGOT_BUILD_REV=${SPIGOT_VERSION}
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get -y upgrade && apt-get -y install git wget
+RUN apt-get update && apt-get -y upgrade && apt-get -y install openjdk-17-headless git wget
 
 RUN wget -O BuildTools.jar ${FILE_BUILDTOOL}
 
