@@ -1,0 +1,68 @@
+name: Build and Push Spigot Image
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - v*
+
+env:
+  VERSION: 1.18.1-1
+
+jobs:
+  build-amd64:
+    runs-on: [self-hosted, linux, AMD64]
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/ttys0/spigot-amd64:${{ env.VERSION }}
+
+  build-arm64:
+    runs-on: [self-hosted,linux,ARM64]
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/ttys0/spigot-arm64:${{ env.VERSION }}
+
+      - run: |
+          docker manifest create --amend ghcr.io/ttys0/spigot:${{ env.VERSION }} ghcr.io/ttys0/spigot-amd64:${{ env.VERSION }} ghcr.io/ttys0/spigot-arm64:${{ env.VERSION }}
+          docker manifest push ghcr.io/ttys0/spigot:${{ env.VERSION }}
+            
+  
