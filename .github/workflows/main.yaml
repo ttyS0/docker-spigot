@@ -29,15 +29,16 @@ jobs:
 
       - name: Push to GHCR
         run: |
-          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/"${IMAGE_NAME}-amd64"
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
 
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-
-          echo IMAGE_ID=$IMAGE_ID
           
-          docker tag $IMAGE_NAME $IMAGE_ID:${{ env.VERSION }}
-          docker push $IMAGE_ID:${{ env.VERSION }}
+          echo IMAGE_ID_ARM64="${IMAGE_ID}-arm64"
+          echo IMAGE_ID_AMD64="${IMAGE_ID}-amd64"
+          
+          docker tag "${IMAGE_NAME}-amd64" $IMAGE_ID_AMD64:$VERSION
+          docker push $IMAGE_ID_AMD64:$VERSION
 
 
   build-arm64:
@@ -66,12 +67,12 @@ jobs:
           echo IMAGE_ID_ARM64="${IMAGE_ID}-arm64"
           echo IMAGE_ID_AMD64="${IMAGE_ID}-amd64"
         
-          docker tag $IMAGE_NAME $IMAGE_ID_AMD64:${{ env.VERSION }}
-          docker push $IMAGE_ID_ARM64:${{ env.VERSION }}
+          docker tag "${IMAGE_NAME}-arm64" $IMAGE_ID_ARM64:$VERSION
+          docker push $IMAGE_ID_ARM64:$VERSION
           
       
-          docker manifest create --amend $IMAGE_ID:${{ env.VERSION }} $IMAGE_ID_AMD64:${{ env.VERSION  }} $IMAGE_ID_ARM64:${{ env.VERSION }} 
-          docker manifest push $IMAGE_ID:${{ env.VERSION }}
+          docker manifest create --amend $IMAGE_ID:$VERSION $IMAGE_ID_AMD64:$VERSION $IMAGE_ID_ARM64:$VERSION
+          docker manifest push $IMAGE_ID:$VERSION
 
  
             
