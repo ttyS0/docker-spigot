@@ -34,8 +34,8 @@ jobs:
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           
-          echo IMAGE_ID_ARM64="${IMAGE_ID}-arm64"
-          echo IMAGE_ID_AMD64="${IMAGE_ID}-amd64"
+          IMAGE_ID_ARM64="${IMAGE_ID}-arm64"
+          IMAGE_ID_AMD64="${IMAGE_ID}-amd64"
           
           docker tag "${IMAGE_NAME}-amd64" $IMAGE_ID_AMD64:$VERSION
           docker push $IMAGE_ID_AMD64:$VERSION
@@ -64,8 +64,8 @@ jobs:
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
 
-          echo IMAGE_ID_ARM64="${IMAGE_ID}-arm64"
-          echo IMAGE_ID_AMD64="${IMAGE_ID}-amd64"
+          IMAGE_ID_ARM64="${IMAGE_ID}-arm64"
+          IMAGE_ID_AMD64="${IMAGE_ID}-amd64"
         
           docker tag "${IMAGE_NAME}-arm64" $IMAGE_ID_ARM64:$VERSION
           docker push $IMAGE_ID_ARM64:$VERSION
