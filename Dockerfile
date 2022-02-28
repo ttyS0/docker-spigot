@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.source="https://github.com/ttyS0/docker-spigot"
 
 #Spigot Build
 ENV FILE_BUILDTOOL https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-ARG SPIGOT_VERSION=1.18.1
+ARG SPIGOT_VERSION=1.18.2
 ENV SPIGOT_REV=${SPIGOT_VERSION}
 ENV SPIGOT_BUILD_REV=${SPIGOT_VERSION}
 ENV DEBIAN_FRONTEND=noninteractive
@@ -21,6 +21,8 @@ ARG MEM="2g"
 ENV JVM_OPTS="-Xms${MEM} -Xmx${MEM}"
 ENV SPIGOT_OPTS="nogui --noconsole"
 ENV SPIGOT_DIR="/minecraft/server"
+
+LABEL org.opencontainers.image.source="https://github.com/ttyS0/docker-spigot"
 
 RUN mkdir -p ${SPIGOT_DIR}
 
