@@ -9,7 +9,7 @@ on:
     - cron: '0 0 1 * *'
 
 env:
-  VERSION: 1.19
+  VERSION: 1.19.1
   IMAGE_NAME: spigot
 
 jobs:
